@@ -1,6 +1,6 @@
 # Declared model v1
 
-CLI JSON parsing rejects duplicate object keys at every level (including policy and assignment), nonfinite literals and excess nesting. Reads are bounded to 32 MiB per input/proposal file; SDK callers own the memory cost of their already constructed dictionaries.
+CLI JSON parsing rejects duplicate object keys at every level (including policy and assignment), nonfinite literals and nesting beyond 64 levels. Reads are bounded to 32 MiB per input/proposal file; SDK callers own the memory cost of their already constructed dictionaries.
 
 Temporal numbers are interpreted using their decimal `str()` spelling, including floats received through the SDK. Arithmetic is exact in that decimal model: gap 0.3−0.1 equals embargo 0.2. Audit duration evidence uses `overlap_ratio`/`gap_ratio` strings so extreme finite endpoints never overflow to JSON infinity. The SDK does not recover precision already lost by a caller before passing a float.
 

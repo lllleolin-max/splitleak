@@ -34,6 +34,13 @@ class CLITests(unittest.TestCase):
             with self.assertRaisesRegex(InputError, "32 MiB"):
                 read(source)
 
+    def test_depth_scanner_ignores_brackets_and_escaped_quotes_in_strings(self):
+        with TemporaryDirectory() as tmp:
+            source = Path(tmp) / "source.json"
+            value = {"samples": [], "note": '[' * 2000 + '\\"' + ']' * 2000}
+            source.write_text(json.dumps(value), encoding="utf-8")
+            self.assertEqual(read(source), value)
+
     def test_cli_complete_workflow_and_refused_overwrite(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)

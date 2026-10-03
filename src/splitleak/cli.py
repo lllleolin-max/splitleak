@@ -6,6 +6,29 @@ from . import InputError, load, audit, explain, plan, check, apply
 
 
 MAX_JSON_BYTES = 32 * 1024 * 1024
+MAX_JSON_DEPTH = 64
+
+
+def bound_nesting(text):
+    # Scan before decoding; brackets in strings and escaped quotes are inert.
+    depth = 0
+    quoted = escaped = False
+    for char in text:
+        if quoted:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                quoted = False
+        elif char == '"':
+            quoted = True
+        elif char in "[{":
+            depth += 1
+            if depth > MAX_JSON_DEPTH:
+                raise InputError("JSON nesting exceeds 64 levels")
+        elif char in "]}":
+            depth -= 1
 
 
 def unique_object(pairs):
@@ -26,8 +49,10 @@ def read(path):
         data = stream.read(MAX_JSON_BYTES + 1)
     if len(data) > MAX_JSON_BYTES:
         raise InputError("JSON input exceeds 32 MiB limit")
+    text = data.decode("utf-8-sig")
+    bound_nesting(text)
     try:
-        return json.loads(data.decode("utf-8-sig"), object_pairs_hook=unique_object,
+        return json.loads(text, object_pairs_hook=unique_object,
                           parse_constant=invalid_constant)
     except RecursionError:
         raise InputError("JSON nesting exceeds parser limit") from None
