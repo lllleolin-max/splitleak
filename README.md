@@ -8,6 +8,13 @@ SplitLeak connects literal text duplicates, token-set Jaccard near duplicates, d
 
 ## Install and run
 
+With Git installed, start from a new checkout / 首次使用先克隆并进入目录：
+
+```console
+git clone https://github.com/lllleolin-max/splitleak.git
+cd splitleak
+```
+
 From a clone, use Python 3.11+ in your intended environment. For an isolated install, run `python -m venv .venv`, then `.venv\Scripts\Activate.ps1` in PowerShell or `source .venv/bin/activate` in Bash. The shortest example works in either shell:
 
 ```console
