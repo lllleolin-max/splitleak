@@ -2,24 +2,20 @@
 
 Explain declared contamination chains in dataset splits, then propose and independently check a costed repair. For research/ML data stewards who must preserve expensive samples, frozen holdouts and atomic batches. Python 3.11+, MIT, standard-library runtime.
 
+中文：审查训练／验证／测试集之间由重复文本、受试者、整组或时间关系形成的泄漏链，并生成保留量与成本受约束的新划分清单。适合小规模数据审查切片；百万行语料、语义相似检索或自动证明模型评估无泄漏不在支持范围内。
+
 SplitLeak connects literal text duplicates, token-set Jaccard near duplicates, declared subjects, atomic groups, and scoped temporal support/embargo. An A→B→C path can constrain A and C even when they do not directly match. This is a **conservative isolation policy**, not proof of semantic equivalence. It does not discover all conceptual leakage.
 
 ## Install and run
 
-From a clone on Windows PowerShell (replace the activation command on Linux with `source .venv/bin/activate`):
+From a clone, use Python 3.11+ in your intended environment. For an isolated install, run `python -m venv .venv`, then `.venv\Scripts\Activate.ps1` in PowerShell or `source .venv/bin/activate` in Bash. The shortest example works in either shell:
 
-```powershell
-py -3 -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install build
-python -m build --wheel
-python -m pip install dist/splitleak-0.1.0-py3-none-any.whl
-python -m unittest discover -s tests -v
+```console
+python -m pip install .
 python examples/workflow.py
-python benchmarks/contrast.py
 ```
 
-The SDK workflow emits `OPTIMAL`, cost `2`, retained `{"test": 1, "train": 5}`, zero residual edges, and a three-hop A→D explanation. It writes inspectable audit, path, plan, manifest and checker JSON under ignored `output/sdk/`.
+`pip install .` builds and installs a normal wheel. The SDK workflow emits `OPTIMAL`, cost `2`, retained `{"test": 1, "train": 5}`, zero residual edges, and a three-hop A→D explanation. It writes inspectable audit, path, plan, manifest and checker JSON under ignored `output/sdk/`; rerunning the SDK example replaces those demonstration files. Use `python examples/workflow.py --output output/another-run` to keep a separate run.
 
 The console command uses new output files and refuses overwrite:
 
@@ -32,6 +28,10 @@ splitleak check examples/transitive.json assignment.json
 ```
 
 `apply` writes an ID→split/null **assignment manifest**. Join it to your dataset locally; null means exclude that repair unit. It never rewrites source text or source splits. Keep artifacts in `output/` for repeated runs.
+
+If the command is not on PATH, use `python -m splitleak.cli` with the same arguments. CLI exits: `0` operation successful or assignment valid; `2` invocation/input/I/O error; `3` plan `INFEASIBLE`; `4` plan `UNKNOWN`; `5` assignment check invalid. `audit` can exit 0 while reporting cross-split conflicts: a successful inspection is not a clean-dataset verdict.
+
+For your own release, start with [the input fields](docs/MODEL.md) and [the six-row example](examples/transitive.json). Review the policy and repair before joining `assignment.json`'s `assignment` mapping to your IDs; retain the original input and its digest with the manifest. Recheck the manifest against that original input before publishing a derived dataset. The tool supplies the decisions, not a dataset writer.
 
 ```python
 import json
@@ -78,6 +78,8 @@ The engineering combination here is a visible mixed-relation path, a declared or
 Every mode sees identical source data, policy, action permissions, costs and retention constraints. Baselines optimize their named subset and are evaluated by the **full** checker. Only their optimized relation subset changes; the full policy is never redefined to make a baseline succeed. Results include retained counts, component conflicts, states inspected and threshold sensitivity in [benchmarks/RESULTS.json](benchmarks/RESULTS.json).
 
 ## Maintenance and commercial rationale
+
+Optional verification: `python -m unittest discover -s tests -v` runs the test suite; `python benchmarks/contrast.py` reproduces the structural comparison. For a separately packaged wheel, run `python -m pip wheel . --no-deps --wheel-dir dist`.
 
 An ML/research data steward could integrate the ID manifest into a dataset release review. Proposed value is fewer manual cross-relation investigations and auditable decisions about retaining costly annotations. If a team spends two hours per release tracing split disputes, saving even part of that review time may matter; this is an **unvalidated hypothesis**, with no measured time saving, customers, adoption, willingness to pay, revenue or ML improvement. Conservative over-grouping and exponential optimization may erase that benefit for large datasets.
 
