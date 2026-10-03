@@ -16,8 +16,20 @@ Correction: validate destination element types before deduplication; add four ma
 
 ## Cycle 2: embargo equality and finite extreme spans
 
+After: `31634e9321f875111373f64aa49a4aab8d4ee94f`.
+
 Before: `0760e43c35e391ce6d158ed49f23169c96478028`.
 
 Self-review tested decimal equality and finite arithmetic extremes. Actual `python probes/review_2.py` exited 1: `AssertionError: decimal gap == embargo incorrectly linked`. Separate serialization probe on two supports `[-1e308,1e308)` exited 1: `ValueError: Out of range float values are not JSON compliant: inf`, caused by the overlap span. These are supported boundary failures, not cosmetic errors.
 
 Correction: graph temporal calculations use rational arithmetic from decimal spelling; checker separately uses Decimal with precision derived from input digit ranges. Duration evidence uses exact ratio strings. Integer finite validation avoids converting huge integers into floats. Oracle time arithmetic and regression coverage include decimal equality, extreme finite floats and 400-digit integer endpoints. Normal wheel rebuild/install, same probe and full suite verification are recorded in the final evidence index.
+
+Observed after verification: `python probes/review_2.py` exited 0 (`decimal equality allowed; extreme finite evidence serializes`), complete suite 15 tests, OK.
+
+## Cycle 3: reject ambiguous JSON declarations
+
+Before: `31634e9321f875111373f64aa49a4aab8d4ee94f`.
+
+Self-review checked machine-readable policy ambiguity at the CLI boundary. Actual `python probes/review_3.py` exited 1: `AssertionError: ambiguous JSON policy accepted`. The input declared the same subject policy twice, false then true; the ordinary decoder silently chose the last declaration. The same issue affected duplicate assignment keys and IDs within an object.
+
+Correction: strict object-pairs decoding rejects repeated keys at every nesting level. Nonfinite constants, parser nesting exhaustion and files larger than 32 MiB get declared input errors. Add CLI workflow/source-preservation/overwrite and malformed JSON regression tests. Normal wheel rebuild/install, the same probe and full verification are recorded in the final evidence index.

@@ -5,8 +5,32 @@ import sys
 from . import InputError, load, audit, explain, plan, check, apply
 
 
+MAX_JSON_BYTES = 32 * 1024 * 1024
+
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise InputError(f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def invalid_constant(value):
+    raise InputError(f"nonfinite JSON constant: {value}")
+
+
 def read(path):
-    return json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    with Path(path).open("rb") as stream:
+        data = stream.read(MAX_JSON_BYTES + 1)
+    if len(data) > MAX_JSON_BYTES:
+        raise InputError("JSON input exceeds 32 MiB limit")
+    try:
+        return json.loads(data.decode("utf-8-sig"), object_pairs_hook=unique_object,
+                          parse_constant=invalid_constant)
+    except RecursionError:
+        raise InputError("JSON nesting exceeds parser limit") from None
 
 
 def main(argv=None):
