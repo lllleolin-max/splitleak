@@ -114,9 +114,11 @@ def load(document: dict) -> Problem:
             if optional[2] is None:
                 raise InputError(f"{ident}: support requires temporal_scope")
         allowed = row.get("allowed_splits", list(splits))
-        if type(allowed) is not list or len(set(allowed)) != len(allowed):
+        if type(allowed) is not list:
             raise InputError(f"{ident}: allowed_splits must be distinct list")
         allowed = tuple(sorted(string(s, "allowed_split") for s in allowed))
+        if len(set(allowed)) != len(allowed):
+            raise InputError(f"{ident}: allowed_splits must be distinct list")
         if set(allowed) - set(splits):
             raise InputError(f"{ident}: allowed_splits contains undeclared split")
         pinned = row.get("pinned", False)

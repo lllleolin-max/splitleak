@@ -17,6 +17,11 @@ def doc(rows, **kwargs):
 
 
 class CoreTests(unittest.TestCase):
+    def test_malformed_sdk_destinations_have_declared_error_type(self):
+        for allowed in [[{}], [[]], [True], [1, "train"]]:
+            with self.subTest(allowed=allowed), self.assertRaises(InputError):
+                load(doc([sample("A", allowed_splits=allowed)]))
+
     def test_chain_explains_nonsemantic_transitivity(self):
         d = doc([sample("A", content="oak birch"), sample("B", content="oak birch pine"),
                  sample("C", "test", content="birch pine"), sample("Z", "test", content="isolated", pinned=True)],
