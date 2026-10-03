@@ -1,0 +1,59 @@
+{
+  "executed_date": "2026-10-03",
+  "scope": "local verification harness correction; new-SHA independent review and remote CI pending",
+  "environment": {"os": "Windows", "python": "3.14.3"},
+  "predecessor": "5f2fe8fe488103ef614b6423983555c1ae43b71f",
+  "package_source_unchanged": true,
+  "package_version": "0.1.0",
+  "global_install_tested": false,
+  "layout_before": {
+    "isolated_prefix": true,
+    "wheel_import": "site-packages",
+    "interpreter_at_prefix_root": true,
+    "console_in_scripts": true,
+    "adjacent_console_exists": false,
+    "exit_code": 1,
+    "actual_failure": "FileNotFoundError: [WinError 2] at real console launch"
+  },
+  "layout_after": {
+    "layout": "isolated prefix-root interpreter / separate scripts",
+    "wheel_import": "site-packages",
+    "adjacent_console_exists": false,
+    "console_steps": 5,
+    "exit_codes": [0, 0, 0, 0, 0],
+    "source_unchanged": true
+  },
+  "normal_venv_after": {
+    "wheel_import": "site-packages",
+    "console_steps": 5,
+    "exit_codes": [0, 0, 0, 0, 0],
+    "source_unchanged": true,
+    "cost": 2,
+    "retained": {"test": 1, "train": 5},
+    "residual_edges": 0,
+    "path_hops": 3
+  },
+  "tests": {"count": 19, "seconds": 0.341, "result": "OK"},
+  "sdk": {"status": "OPTIMAL", "cost": 2, "retained": {"test": 1, "train": 5}, "residual_edges": 0, "path_hops": 3},
+  "contrast": {"comparisons": 9, "threshold_settings": 6, "tracked_results_equal": true},
+  "frozen_peer_probe": {
+    "sha256": "8764ca85d3ae3b2df074f88199d5322aca4755dfa7c8183a2173407edea0cfc6",
+    "oracle_seed": 10903,
+    "oracle_cases": 96,
+    "oracle_outcomes": {"OPTIMAL": 19, "INFEASIBLE": 77},
+    "certificate_forgery_rejected": true,
+    "deleted_bridge_conflict_preserved": true,
+    "rows200_bound_unknown": true,
+    "rows201_rejected": true,
+    "json_duplicate_depth_bytes_and_text_brackets": "PASS",
+    "source_and_existing_output_preserved": true,
+    "disclosure": "synthetic; no incumbent or ML-performance benchmark"
+  },
+  "limits": [
+    "Copied isolated Python layout is not an actual global installation",
+    "Copied Python site-prefix RuntimeWarnings are retained in ignored raw logs",
+    "Local execution is Windows CPython 3.14.3 only",
+    "Remote CI of the corrected commit has not been run by this task",
+    "No new algorithm review cycle or inherited independent scores"
+  ]
+}

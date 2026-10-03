@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
-import sys
+import sysconfig
 import uuid
 import splitleak
 
@@ -16,7 +16,8 @@ def main():
     before = hashlib.sha256(source.read_bytes()).hexdigest()
     output = root / ".local" / ("release-" + uuid.uuid4().hex[:10])
     output.mkdir(parents=True)
-    console = Path(sys.executable).with_name("splitleak.exe" if os.name == "nt" else "splitleak")
+    # A global Windows interpreter has its console scripts under Scripts.
+    console = Path(sysconfig.get_path("scripts")) / ("splitleak.exe" if os.name == "nt" else "splitleak")
     commands = [
         ["audit", str(source), "--out", str(output / "audit.json")],
         ["explain", str(source), "A", "D", "--out", str(output / "path.json")],

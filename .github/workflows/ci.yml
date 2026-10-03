@@ -20,6 +20,8 @@ jobs:
       - run: python examples/workflow.py
       - run: python benchmarks/contrast.py
       - run: python tools/verify_release.py
+      - if: runner.os == 'Windows' && matrix.python == '3.14'
+        run: python probes/console_layout.py --wheel dist/splitleak-0.1.0-py3-none-any.whl
       - run: splitleak audit examples/transitive.json --out output/cli-audit.json
       - run: splitleak explain examples/transitive.json A D
       - run: splitleak plan examples/transitive.json --out output/cli-proposal.json

@@ -8,6 +8,8 @@ benchmarks/RESULTS.json
 benchmarks/contrast.py
 docs/ARCHITECTURE.md
 docs/ARCHIVE_REPLAY_RESULTS.json
+docs/CONSOLE_PORTABILITY.md
+docs/CONSOLE_PORTABILITY_RESULTS.json
 docs/ITERATIONS.md
 docs/ITERATION_INDEX.json
 docs/MODEL.md
@@ -17,6 +19,7 @@ examples/baseline_succeeds.json
 examples/conservative_chain.json
 examples/transitive.json
 examples/workflow.py
+probes/console_layout.py
 probes/review_1.py
 probes/review_2.py
 probes/review_3.py
