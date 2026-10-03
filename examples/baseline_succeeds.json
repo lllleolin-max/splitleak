@@ -1,0 +1,11 @@
+{
+  "splits": ["train", "test"],
+  "policy": {"near_threshold": null},
+  "constraints": {"min_total": 4, "min_retained": {"train": 1, "test": 1}, "max_deletes": 0},
+  "samples": [
+    {"id": "A", "split": "train", "content": "same", "subject": "shared"},
+    {"id": "B", "split": "test", "content": "same", "subject": "shared"},
+    {"id": "Y", "split": "train", "pinned": true},
+    {"id": "Z", "split": "test", "pinned": true}
+  ]
+}

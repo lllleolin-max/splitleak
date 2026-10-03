@@ -1,0 +1,10 @@
+{
+  "splits": ["train", "test"],
+  "policy": {"near_threshold": 0.66},
+  "constraints": {"min_total": 2, "min_retained": {"train": 1, "test": 1}},
+  "samples": [
+    {"id": "A", "split": "train", "content": "oak birch", "pinned": true},
+    {"id": "B", "split": "train", "content": "oak birch pine", "delete_cost": 1},
+    {"id": "C", "split": "test", "content": "birch pine", "pinned": true}
+  ]
+}

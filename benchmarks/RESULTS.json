@@ -1,0 +1,138 @@
+{
+  "claims": "policy contamination and retention only; no observed ML or customer gain",
+  "comparison": [
+    {
+      "case": "transitive",
+      "component_conflicts": 1,
+      "cost": 0,
+      "full_policy_valid": false,
+      "mode": "row-dedup",
+      "residual_edges": 1,
+      "retained": 6,
+      "states": 10,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "transitive",
+      "component_conflicts": 1,
+      "cost": 1,
+      "full_policy_valid": false,
+      "mode": "single-group",
+      "residual_edges": 1,
+      "retained": 6,
+      "states": 9,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "transitive",
+      "component_conflicts": 0,
+      "cost": 2,
+      "full_policy_valid": true,
+      "mode": "full",
+      "residual_edges": 0,
+      "retained": 6,
+      "states": 7,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "baseline_succeeds",
+      "component_conflicts": 0,
+      "cost": 1,
+      "full_policy_valid": true,
+      "mode": "row-dedup",
+      "residual_edges": 0,
+      "retained": 4,
+      "states": 9,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "baseline_succeeds",
+      "component_conflicts": 0,
+      "cost": 1,
+      "full_policy_valid": true,
+      "mode": "single-group",
+      "residual_edges": 0,
+      "retained": 4,
+      "states": 9,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "baseline_succeeds",
+      "component_conflicts": 0,
+      "cost": 1,
+      "full_policy_valid": true,
+      "mode": "full",
+      "residual_edges": 0,
+      "retained": 4,
+      "states": 9,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "conservative_chain",
+      "component_conflicts": 1,
+      "cost": 0,
+      "full_policy_valid": false,
+      "mode": "row-dedup",
+      "residual_edges": 1,
+      "retained": 3,
+      "states": 6,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "conservative_chain",
+      "component_conflicts": 1,
+      "cost": 0,
+      "full_policy_valid": false,
+      "mode": "single-group",
+      "residual_edges": 1,
+      "retained": 3,
+      "states": 6,
+      "status": "OPTIMAL"
+    },
+    {
+      "case": "conservative_chain",
+      "component_conflicts": null,
+      "cost": null,
+      "full_policy_valid": false,
+      "mode": "full",
+      "residual_edges": null,
+      "retained": null,
+      "states": 4,
+      "status": "INFEASIBLE"
+    }
+  ],
+  "fixture_kind": "disclosed synthetic",
+  "same_constraints_across_modes": true,
+  "threshold_sensitivity": [
+    {
+      "cost": 0,
+      "status": "OPTIMAL",
+      "threshold": null
+    },
+    {
+      "cost": null,
+      "status": "INFEASIBLE",
+      "threshold": 0
+    },
+    {
+      "cost": null,
+      "status": "INFEASIBLE",
+      "threshold": 0.34
+    },
+    {
+      "cost": null,
+      "status": "INFEASIBLE",
+      "threshold": 0.66
+    },
+    {
+      "cost": 0,
+      "status": "OPTIMAL",
+      "threshold": 0.9
+    },
+    {
+      "cost": 0,
+      "status": "OPTIMAL",
+      "threshold": 1
+    }
+  ]
+}

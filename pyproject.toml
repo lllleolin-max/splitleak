@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "splitleak"
+version = "0.1.0"
+description = "Explainable declared split-contamination graphs and bounded costed repair"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "lllleolin-max"}]
+readme = "README.md"
+dependencies = []
+
+[project.scripts]
+splitleak = "splitleak.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

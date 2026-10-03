@@ -1,0 +1,13 @@
+{
+  "splits": ["train", "test"],
+  "policy": {"near_threshold": 0.66, "embargo": 1},
+  "constraints": {"min_total": 6, "min_retained": {"train": 1, "test": 1}, "max_deletes": 0},
+  "samples": [
+    {"id": "A", "split": "train", "content": "oak birch", "group": "batch-a", "move_cost": 4},
+    {"id": "A2", "split": "train", "group": "batch-a", "move_cost": 4},
+    {"id": "B", "split": "train", "content": "oak birch pine", "subject": "subject-2", "move_cost": 3},
+    {"id": "C", "split": "test", "content": "birch pine", "subject": "subject-2", "temporal_scope": "stream-2", "start": 0, "end": 2, "move_cost": 1},
+    {"id": "D", "split": "test", "temporal_scope": "stream-2", "start": 2.5, "end": 3, "move_cost": 1},
+    {"id": "Z", "split": "test", "content": "independent", "pinned": true}
+  ]
+}
