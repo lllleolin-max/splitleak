@@ -35,3 +35,11 @@ Self-review checked machine-readable policy ambiguity at the CLI boundary. Actua
 Correction: strict object-pairs decoding rejects repeated keys at every nesting level. Nonfinite constants, parser nesting exhaustion and files larger than 32 MiB get declared input errors. Add CLI workflow/source-preservation/overwrite and malformed JSON regression tests. Normal wheel rebuild/install, the same probe and full verification are recorded in the final evidence index.
 
 Intermediate commit `bb72c4417da7e1fbd67cd2d2008b52ccebbfaf6f` passed the duplicate-policy probe but its full 18-test run had **one failure**: Python 3.14 decoded 2000 nested arrays without the expected RecursionError. The initial resource guard depended on parser behavior and therefore did not impose a stable depth bound. This result was not counted as a successful final verification. Follow-up adds a string/escape-aware pre-decoding depth limit of 64 with a bracket-in-text counterexample. The completed cycle's after SHA is in the final evidence index.
+
+Final cycle-3 after: `81025cc37faa6e7f2a56e3f3db22016126da7800`; duplicate-policy probe exit 0, complete suite 19 tests, OK.
+
+## Archive reproduction
+
+The full immutable before/after SHAs are in [ITERATION_INDEX.json](ITERATION_INDEX.json). Run `python tools/replay_iterations.py` after installing `build`. It exports each exact commit with `git archive`, builds its normal wheel, installs into a fresh venv, asserts site-packages import, runs the **same final regression probe** against both states and requires the predecessor's exact failure message and successor exit 0. It also runs each after snapshot's own full tests. Raw logs and archive paths stay under ignored `.local/`.
+
+Executed on Windows / Python 3.14.3 on 2026-10-03: all six probes returned expected exits (1 before / 0 after), with 14/15/19 archived after tests all passing. [ARCHIVE_REPLAY_RESULTS.json](ARCHIVE_REPLAY_RESULTS.json) is the actual redacted machine output, not a proposed result. The replay tool itself exited 0.

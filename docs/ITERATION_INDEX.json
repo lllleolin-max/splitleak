@@ -1,0 +1,5 @@
+[
+  {"cycle": 1, "before": "a1001616ed27435904eec6d9a7447174446b9f9f", "after": "0760e43c35e391ce6d158ed49f23169c96478028", "probe": "probes/review_1.py", "failure": "expected InputError, got TypeError", "after_tests": 14},
+  {"cycle": 2, "before": "0760e43c35e391ce6d158ed49f23169c96478028", "after": "31634e9321f875111373f64aa49a4aab8d4ee94f", "probe": "probes/review_2.py", "failure": "decimal gap == embargo incorrectly linked", "after_tests": 15},
+  {"cycle": 3, "before": "31634e9321f875111373f64aa49a4aab8d4ee94f", "after": "81025cc37faa6e7f2a56e3f3db22016126da7800", "probe": "probes/review_3.py", "failure": "ambiguous JSON policy accepted", "after_tests": 19}
+]

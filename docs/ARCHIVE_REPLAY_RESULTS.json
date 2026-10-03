@@ -1,0 +1,56 @@
+[
+  {
+    "cycle": 1,
+    "state": "before",
+    "sha": "a1001616ed27435904eec6d9a7447174446b9f9f",
+    "wheel_import": "site-packages",
+    "probe_exit": 1,
+    "finding": "expected InputError, got TypeError"
+  },
+  {
+    "cycle": 1,
+    "state": "after",
+    "sha": "0760e43c35e391ce6d158ed49f23169c96478028",
+    "wheel_import": "site-packages",
+    "probe_exit": 0,
+    "finding": "review_1: PASS (4 malformed SDK destinations rejected as InputError)",
+    "tests": 14,
+    "test_exit": 0
+  },
+  {
+    "cycle": 2,
+    "state": "before",
+    "sha": "0760e43c35e391ce6d158ed49f23169c96478028",
+    "wheel_import": "site-packages",
+    "probe_exit": 1,
+    "finding": "decimal gap == embargo incorrectly linked"
+  },
+  {
+    "cycle": 2,
+    "state": "after",
+    "sha": "31634e9321f875111373f64aa49a4aab8d4ee94f",
+    "wheel_import": "site-packages",
+    "probe_exit": 0,
+    "finding": "review_2: PASS (decimal equality allowed; extreme finite evidence serializes)",
+    "tests": 15,
+    "test_exit": 0
+  },
+  {
+    "cycle": 3,
+    "state": "before",
+    "sha": "31634e9321f875111373f64aa49a4aab8d4ee94f",
+    "wheel_import": "site-packages",
+    "probe_exit": 1,
+    "finding": "ambiguous JSON policy accepted"
+  },
+  {
+    "cycle": 3,
+    "state": "after",
+    "sha": "81025cc37faa6e7f2a56e3f3db22016126da7800",
+    "wheel_import": "site-packages",
+    "probe_exit": 0,
+    "finding": "review_3: PASS (duplicate JSON policy key rejected, exit 2)",
+    "tests": 19,
+    "test_exit": 0
+  }
+]
