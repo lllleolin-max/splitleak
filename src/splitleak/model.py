@@ -16,7 +16,7 @@ def integer(value, name, minimum=0):
 
 
 def number(value, name):
-    if type(value) not in (int, float) or not math.isfinite(value):
+    if type(value) not in (int, float) or (type(value) is float and not math.isfinite(value)):
         raise InputError(f"{name}: expected finite number, excluding bool")
     return value
 

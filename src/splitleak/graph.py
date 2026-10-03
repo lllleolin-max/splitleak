@@ -26,13 +26,15 @@ def relations(value):
                                 "meaning": "token-set Jaccard; not semantic probability"})
         if (p.policy.temporal and a.temporal_scope is not None and a.temporal_scope == b.temporal_scope
                 and a.start is not None and b.start is not None):
-            overlap = min(a.end, b.end) - max(a.start, b.start)
-            gap = max(a.start, b.start) - min(a.end, b.end)
+            # Decimal spellings are exact; avoid drift and overflowing spans.
+            sa, ea, sb, eb = (Fraction(str(x)) for x in (a.start, a.end, b.start, b.end))
+            overlap = min(ea, eb) - max(sa, sb)
+            gap = max(sa, sb) - min(ea, eb)
             if overlap > 0:
                 reasons.append({"kind": "temporal", "strength": 1,
-                                "overlap": overlap, "meaning": "half-open support overlap"})
-            elif gap < p.policy.embargo:
-                reasons.append({"kind": "embargo", "strength": 1, "gap": gap,
+                                "overlap_ratio": str(overlap), "meaning": "half-open support overlap"})
+            elif gap < Fraction(str(p.policy.embargo)):
+                reasons.append({"kind": "embargo", "strength": 1, "gap_ratio": str(gap),
                                 "meaning": "gap strictly below embargo"})
         if reasons:
             edges.append({"a": a.id, "b": b.id, "reasons": reasons})

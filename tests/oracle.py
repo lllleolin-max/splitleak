@@ -25,9 +25,10 @@ def optimum(document):
                 linked |= Fraction(len(left & right), len(left | right)) >= Fraction(str(threshold))
             if (policy.get("temporal", True) and a.get("temporal_scope") is not None and a.get("temporal_scope") == b.get("temporal_scope")
                     and a.get("start") is not None and b.get("start") is not None):
-                overlap = max(a["start"], b["start"]) < min(a["end"], b["end"])
-                gap = max(a["start"], b["start"]) - min(a["end"], b["end"])
-                linked |= overlap or gap < policy.get("embargo", 0)
+                sa, ea, sb, eb = (Fraction(str(x)) for x in (a["start"], a["end"], b["start"], b["end"]))
+                overlap = max(sa, sb) < min(ea, eb)
+                gap = max(sa, sb) - min(ea, eb)
+                linked |= overlap or gap < Fraction(str(policy.get("embargo", 0)))
             reach[i][j] = bool(reach[i][j] or linked)
     for k in range(n):
         for i in range(n):

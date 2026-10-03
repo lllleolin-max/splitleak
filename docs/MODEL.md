@@ -1,5 +1,7 @@
 # Declared model v1
 
+Temporal numbers are interpreted using their decimal `str()` spelling, including floats received through the SDK. Arithmetic is exact in that decimal model: gap 0.3−0.1 equals embargo 0.2. Audit duration evidence uses `overlap_ratio`/`gap_ratio` strings so extreme finite endpoints never overflow to JSON infinity. The SDK does not recover precision already lost by a caller before passing a float.
+
 Input is a JSON object with `samples`, optional `splits` (default train/validation/test), `policy`, `constraints`. See executable fixtures. SDK `load(dict)` returns an immutable validated `Problem`; all public functions also accept a dict.
 
 | Sample field | Meaning / default |

@@ -4,6 +4,7 @@ Recomputes pair evidence and reachability from the validated source, not a
 proposal's edges. This is independent implementation, not independent authorship.
 """
 from .model import problem
+from decimal import Decimal, localcontext
 
 
 def supported(a, b, policy):
@@ -17,17 +18,25 @@ def supported(a, b, policy):
         left, right = set(a.content.casefold().split()), set(b.content.casefold().split())
         if left and right:
             # Rational comparison is independent of graph's Fraction scoring.
-            from decimal import Decimal
-            threshold = Decimal(str(policy.near_threshold))
-            if Decimal(len(left & right)) >= threshold * len(left | right):
-                return True
+            with localcontext() as context:
+                context.prec = 100
+                threshold = Decimal(str(policy.near_threshold))
+                if Decimal(len(left & right)) >= threshold * len(left | right):
+                    return True
     if (policy.temporal and a.temporal_scope is not None and a.temporal_scope == b.temporal_scope
             and a.start is not None and b.start is not None):
-        if a.start < b.end and b.start < a.end:
-            return True
-        distance = b.start - a.end if a.end <= b.start else a.start - b.end
-        if distance < policy.embargo:
-            return True
+        # Independent decimal arithmetic, precision derived from digit ranges.
+        numbers = [Decimal(str(x)) for x in (a.start, a.end, b.start, b.end, policy.embargo)]
+        with localcontext() as context:
+            high = max(x.adjusted() for x in numbers)
+            low = min(x.as_tuple().exponent for x in numbers)
+            context.prec = max(100, high - low + 4)
+            sa, ea, sb, eb, embargo = numbers
+            if sa < eb and sb < ea:
+                return True
+            distance = sb - ea if ea <= sb else sa - eb
+            if distance < embargo:
+                return True
     return False
 
 

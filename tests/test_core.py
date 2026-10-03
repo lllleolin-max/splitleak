@@ -17,6 +17,21 @@ def doc(rows, **kwargs):
 
 
 class CoreTests(unittest.TestCase):
+    def test_decimal_temporal_equality_extreme_and_huge_integer(self):
+        d = doc([sample("A", temporal_scope="s", start=0, end=.1),
+                 sample("B", "test", temporal_scope="s", start=.3, end=.4)],
+                policy={"embargo": .2, "near_threshold": None})
+        self.assertEqual(audit(d)["edges"], [])
+        self.assertEqual(plan(d)["cost"], 0)
+        self.assertTrue(check(d, plan(d))["valid"])
+        self.assertEqual(optimum(d)[0][0], 0)
+        for bound in [1e308, 10**400]:
+            d = doc([sample("A", temporal_scope="s", start=-bound, end=bound),
+                     sample("B", "test", temporal_scope="s", start=-bound, end=bound)])
+            json.dumps(audit(d), allow_nan=False)
+            self.assertEqual(plan(d)["cost"], 1)
+            self.assertEqual(optimum(d)[0][0], 1)
+
     def test_malformed_sdk_destinations_have_declared_error_type(self):
         for allowed in [[{}], [[]], [True], [1, "train"]]:
             with self.subTest(allowed=allowed), self.assertRaises(InputError):
