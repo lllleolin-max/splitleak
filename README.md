@@ -54,6 +54,30 @@ if proposal["assignment"] is not None and check(problem, proposal)["valid"]:
 
 An `UNKNOWN` plan can carry an inspected feasible upper bound. Check it before using it; its cost is not certified minimal. `INFEASIBLE` means exhaustive search proved no allowed assignment. `OPTIMAL` means the declared integer-cost model was exhausted/pruned soundly; optimality is also tested against a separate small exhaustive oracle. The checker certifies feasibility, not the search proof.
 
+## Candidate indexing in 0.2
+
+The graph builder combines exact/group/subject buckets, shared-token postings
+and a scoped time sweep before evaluating complete pair evidence. This avoids
+Jaccard calculations for pairs that cannot satisfy any declared relation. It
+preserves reason order, exact ratios, all components, explanation paths and the
+original conservative isolation policy. The independent checker still examines
+all pairs. No policy, 200-row limit or optimization state limit was relaxed.
+
+Zero near threshold still connects every pair with nonempty token sets, even
+when disjoint. Empty text can still match exactly. Dense and common-token
+inputs can require all 19,900 pairs at 200 rows; indexing adds memory and can
+slow small inputs. [Measured costs](docs/CANDIDATES.md) retain these cases and
+separate audit time from complete planning with the independent checker.
+
+```console
+python benchmarks/candidate_work.py --out candidate-work-new.json
+```
+
+The offline benchmark uses synthetic inputs and a new output filename. Machine
+JSON on stdout/stderr uses ASCII escapes to preserve Unicode IDs on legacy
+Windows encodings. Reports saved with `--out` retain their original UTF-8 JSON
+format. Parse either with a JSON decoder; source files are unchanged.
+
 ## 中文：用途、使用与边界
 
 SplitLeak 面向需要审查训练／验证／测试集的研究者和数据负责人。单独去重或按一列分组，可能遗漏近重复→同受试者→相邻时间支持形成的跨集链。它给出直接边类型、强度与传递路径，再在固定样本、整组、移动／删除成本和最低保留量约束内寻找修复。
@@ -90,4 +114,4 @@ Optional verification: `python -m unittest discover -s tests -v` runs the test s
 
 An ML/research data steward could integrate the ID manifest into a dataset release review. Proposed value is fewer manual cross-relation investigations and auditable decisions about retaining costly annotations. If a team spends two hours per release tracing split disputes, saving even part of that review time may matter; this is an **unvalidated hypothesis**, with no measured time saving, customers, adoption, willingness to pay, revenue or ML improvement. Conservative over-grouping and exponential optimization may erase that benefit for large datasets.
 
-Supported scope: at most 200 samples and ten splits, each content string at most 100,000 characters. Quadratic relation construction and exponential group search are for review slices and pilots, not million-row corpora. [Architecture](docs/ARCHITECTURE.md), [security](SECURITY.md), [contribution guide](CONTRIBUTING.md) and [real iteration evidence](docs/ITERATIONS.md) define operational boundaries. Checked-in CI targets Ubuntu/Windows × Python 3.11/3.14; [console portability evidence](docs/CONSOLE_PORTABILITY.md) distinguishes the executed local correction from pending new-commit remote verification.
+Supported scope: at most 200 samples and ten splits, each content string at most 100,000 characters. Dense graph output and the independent checker remain quadratic; exact group search remains exponential. These are review slices and pilots, not million-row corpora. [Architecture](docs/ARCHITECTURE.md), [security](SECURITY.md), [contribution guide](CONTRIBUTING.md) and [real iteration evidence](docs/ITERATIONS.md) define operational boundaries. Checked-in CI targets Ubuntu/Windows × Python 3.11/3.14; the console-layout step applies only to Windows/Python 3.14 and is skipped in the other three matrix groups. [Prior console portability evidence](docs/CONSOLE_PORTABILITY.md) remains historical; new-commit remote verification is a separate gate.

@@ -1,0 +1,370 @@
+{
+  "baseline_sha": "2a1c617426a96dc4f4fe7ddcd773ec364b3bd15f",
+  "after_sha": "0a776ea068e0defd395a13e8c288b19f3dc533f2",
+  "measurement": "ordinary canonical LF installed SDK on Windows/Python 3.14.3; three untraced timing samples; separate traced whole-call peak; synthetic same inputs",
+  "before": {
+    "sparse-long": {
+      "rows": 200,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 1.3506000395864248,
+        "python_peak_bytes": 451640,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 114.25290000624955,
+        "python_peak_bytes": 1074149,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 322.89120007772,
+        "python_peak_bytes": 1080797,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 27267072,
+        "process_lifetime_peak_bytes": 28872704,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "common-token-no-near-edges": {
+      "rows": 200,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 1.2101000174880028,
+        "python_peak_bytes": 454200,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 117.24249995313585,
+        "python_peak_bytes": 1083213,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 318.3525000931695,
+        "python_peak_bytes": 1088517,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 28233728,
+        "process_lifetime_peak_bytes": 29405184,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "dense-full-reasons": {
+      "rows": 200,
+      "edges": 19900,
+      "graph_sha256": "cdd18f673c28a4ee1b545e79c7536b73395f2cc4250565715f05bb87851aef51",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 0.8295000297948718,
+        "python_peak_bytes": 178535,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 225.45790008734912,
+        "python_peak_bytes": 26828431,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 233.89319994021207,
+        "python_peak_bytes": 28651705,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 67272704,
+        "process_lifetime_peak_bytes": 122351616,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "zero-threshold-disjoint": {
+      "rows": 200,
+      "edges": 19900,
+      "graph_sha256": "676f1dfa5edb14d9ca0f255b54273da261dab42f544be6f35ab2604ccbbc1328",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 0.7232000352814794,
+        "python_peak_bytes": 130048,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 58.288299944251776,
+        "python_peak_bytes": 10684799,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 95.10180004872382,
+        "python_peak_bytes": 12569561,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 48689152,
+        "process_lifetime_peak_bytes": 122351616,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "small-two": {
+      "rows": 2,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 1,
+        "union": 1
+      },
+      "load": {
+        "median_ms": 0.028699985705316067,
+        "python_peak_bytes": 5387,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 0.05080003757029772,
+        "python_peak_bytes": 17305,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 0.08240004535764456,
+        "python_peak_bytes": 20353,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 45547520,
+        "process_lifetime_peak_bytes": 122351616,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "single": {
+      "rows": 1,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 0,
+        "union": 0
+      },
+      "load": {
+        "median_ms": 0.017300015315413475,
+        "python_peak_bytes": 3750,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 0.04950002767145634,
+        "python_peak_bytes": 6637,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 0.06630003917962313,
+        "python_peak_bytes": 7293,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 45576192,
+        "process_lifetime_peak_bytes": 122351616,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    }
+  },
+  "after": {
+    "sparse-long": {
+      "rows": 200,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 0,
+        "union": 0
+      },
+      "load": {
+        "median_ms": 1.4313000719994307,
+        "python_peak_bytes": 451640,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 3.650899976491928,
+        "python_peak_bytes": 1675909,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 201.2068999465555,
+        "python_peak_bytes": 1682557,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 27512832,
+        "process_lifetime_peak_bytes": 30253056,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "common-token-no-near-edges": {
+      "rows": 200,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 1.435799989849329,
+        "python_peak_bytes": 454200,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 105.65540008246899,
+        "python_peak_bytes": 1703785,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 316.950700012967,
+        "python_peak_bytes": 1709089,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 28241920,
+        "process_lifetime_peak_bytes": 31010816,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "dense-full-reasons": {
+      "rows": 200,
+      "edges": 19900,
+      "graph_sha256": "cdd18f673c28a4ee1b545e79c7536b73395f2cc4250565715f05bb87851aef51",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 0.90230000205338,
+        "python_peak_bytes": 178535,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 144.6462000021711,
+        "python_peak_bytes": 26882205,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 160.57880001608282,
+        "python_peak_bytes": 28646017,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 66445312,
+        "process_lifetime_peak_bytes": 121999360,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "zero-threshold-disjoint": {
+      "rows": 200,
+      "edges": 19900,
+      "graph_sha256": "676f1dfa5edb14d9ca0f255b54273da261dab42f544be6f35ab2604ccbbc1328",
+      "actual_jaccard_set_operations": {
+        "intersection": 19900,
+        "union": 19900
+      },
+      "load": {
+        "median_ms": 0.8161000441759825,
+        "python_peak_bytes": 130048,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 54.470599978230894,
+        "python_peak_bytes": 10716759,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 90.89170000515878,
+        "python_peak_bytes": 12564769,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 47005696,
+        "process_lifetime_peak_bytes": 121999360,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "small-two": {
+      "rows": 2,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 0,
+        "union": 0
+      },
+      "load": {
+        "median_ms": 0.029099988751113415,
+        "python_peak_bytes": 5387,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 0.06599992047995329,
+        "python_peak_bytes": 16353,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 0.10240008123219013,
+        "python_peak_bytes": 20505,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 43872256,
+        "process_lifetime_peak_bytes": 121999360,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    },
+    "single": {
+      "rows": 1,
+      "edges": 0,
+      "graph_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "actual_jaccard_set_operations": {
+        "intersection": 0,
+        "union": 0
+      },
+      "load": {
+        "median_ms": 0.019699917174875736,
+        "python_peak_bytes": 3750,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "audit": {
+        "median_ms": 0.040100072510540485,
+        "python_peak_bytes": 9405,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "whole_plan_with_independent_checker": {
+        "median_ms": 0.05679996684193611,
+        "python_peak_bytes": 10117,
+        "scope": "full call incl result allocation; separate untraced timing"
+      },
+      "rss": {
+        "current_bytes": 43880448,
+        "process_lifetime_peak_bytes": 121999360,
+        "scope": "whole process incl imports, prior cases and tracing; not graph-owned"
+      },
+      "input_unchanged": true
+    }
+  },
+  "limits": "Shared workstation observations, not production throughput or universal gain. RSS includes imports/prior cases/tracing; checker remains all-pairs."
+}

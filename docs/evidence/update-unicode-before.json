@@ -1,0 +1,97 @@
+{
+  "sha": "2a1c617426a96dc4f4fe7ddcd773ec364b3bd15f",
+  "actual_sysconfig_console": true,
+  "records": [
+    {
+      "mode": "native",
+      "native_encoding": "gbk",
+      "case": "valid",
+      "exit": 2,
+      "expected_exit": 0,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "native",
+      "native_encoding": "gbk",
+      "case": "invalid",
+      "exit": 2,
+      "expected_exit": 2,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "utf8-off",
+      "native_encoding": "gbk",
+      "case": "valid",
+      "exit": 2,
+      "expected_exit": 0,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "utf8-off",
+      "native_encoding": "gbk",
+      "case": "invalid",
+      "exit": 2,
+      "expected_exit": 2,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "utf8-on",
+      "native_encoding": "utf-8",
+      "case": "valid",
+      "exit": 0,
+      "expected_exit": 0,
+      "utf8_json": true,
+      "source_unchanged": true
+    },
+    {
+      "mode": "utf8-on",
+      "native_encoding": "utf-8",
+      "case": "invalid",
+      "exit": 2,
+      "expected_exit": 2,
+      "utf8_json": true,
+      "source_unchanged": true
+    },
+    {
+      "mode": "cp936",
+      "native_encoding": "gbk",
+      "case": "valid",
+      "exit": 2,
+      "expected_exit": 0,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "cp936",
+      "native_encoding": "gbk",
+      "case": "invalid",
+      "exit": 2,
+      "expected_exit": 2,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "cp1252",
+      "native_encoding": "cp1252",
+      "case": "valid",
+      "exit": 2,
+      "expected_exit": 0,
+      "utf8_json": false,
+      "source_unchanged": true
+    },
+    {
+      "mode": "cp1252",
+      "native_encoding": "cp1252",
+      "case": "invalid",
+      "exit": 2,
+      "expected_exit": 2,
+      "utf8_json": false,
+      "source_unchanged": true
+    }
+  ],
+  "scope": "Same valid Unicode ID and invalid partial-time fixtures; original raw stdout/stderr retained privately, inputs unchanged."
+}

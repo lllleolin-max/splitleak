@@ -92,6 +92,24 @@ class CandidateTests(unittest.TestCase):
         self.assertEqual(plan(d, max_states=1)['status'], 'UNKNOWN')
         self.assertEqual(plan(d, max_states=2)['status'], 'OPTIMAL')
 
+    def test_nested_interval_expiry_and_union_with_each_policy_combination(self):
+        # Time order differs from ID order. Expiring short supports must not
+        # discard a longer active support; boundary equality stays excluded.
+        rows = [
+            {'id': 'Z', 'split': 'train', 'content': 'Straße a', 'subject': 'u', 'group': 'g', 'temporal_scope': 's', 'start': 0, 'end': 10},
+            {'id': 'A', 'split': 'test', 'content': 'STRASSE a', 'subject': 'u', 'group': 'g', 'temporal_scope': 's', 'start': 1, 'end': 2},
+            {'id': 'B', 'split': 'train', 'content': '', 'temporal_scope': 's', 'start': 3, 'end': 4},
+            {'id': 'C', 'split': 'test', 'content': '', 'temporal_scope': 's', 'start': 10, 'end': 11},
+            {'id': 'D', 'split': 'train', 'content': 'disjoint', 'temporal_scope': 'other', 'start': 0, 'end': 10},
+            {'id': 'E', 'split': 'test', 'content': None},
+        ]
+        for enabled in range(8):
+            for threshold in (None, 0, .5, 1):
+                for embargo in (0, 1):
+                    d = {'samples': rows, 'policy': {'exact': bool(enabled & 1), 'subject': bool(enabled & 2),
+                         'temporal': bool(enabled & 4), 'near_threshold': threshold, 'embargo': embargo}}
+                    self.assertEqual(graph.relations(d), reference(d))
+
 
 if __name__ == '__main__':
     unittest.main()
