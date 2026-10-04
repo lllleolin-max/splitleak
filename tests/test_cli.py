@@ -1,14 +1,49 @@
 from contextlib import redirect_stdout, redirect_stderr
 from io import StringIO
 import json
+import os
 from pathlib import Path
+import subprocess
+import sysconfig
 from tempfile import TemporaryDirectory
 import unittest
 from splitleak.cli import main, read, MAX_JSON_BYTES
-from splitleak import InputError
+from splitleak import InputError, audit
 
 
 class CLITests(unittest.TestCase):
+    def test_unicode_console_json_and_unchanged_utf8_output(self):
+        console = Path(sysconfig.get_path('scripts')) / ('splitleak.exe' if os.name == 'nt' else 'splitleak')
+        document = {'samples': [{'id': 'A\U0001f642', 'split': 'train', 'content': '\u4e2d\u6587 Stra\u00dfe'}]}
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / 'source.json'
+            saved = json.dumps(audit(document), ensure_ascii=False, allow_nan=False, sort_keys=True, indent=2) + '\n'
+            for encoding in ('cp936', 'cp1252', 'utf-8'):
+                env = dict(os.environ, PYTHONIOENCODING=encoding)
+                source.write_text(json.dumps(document, ensure_ascii=False), encoding='utf-8')
+                original = source.read_bytes()
+                result = subprocess.run([str(console), 'audit', str(source)], capture_output=True, env=env)
+                self.assertEqual(result.returncode, 0)
+                self.assertEqual(result.stderr, b'')
+                self.assertTrue(result.stdout.isascii())
+                self.assertEqual(json.loads(result.stdout), audit(document))
+                output = root / (encoding + '.json')
+                result = subprocess.run([str(console), 'audit', str(source), '--out', str(output)], capture_output=True, env=env)
+                self.assertEqual((result.returncode, result.stdout, result.stderr), (0, b'', b''))
+                self.assertEqual(output.read_bytes(), saved.encode('utf-8'))
+                self.assertEqual(source.read_bytes(), original)
+                invalid = dict(document, samples=[dict(document['samples'][0], start=1)])
+                source.write_text(json.dumps(invalid, ensure_ascii=False), encoding='utf-8')
+                original = source.read_bytes()
+                refused = root / (encoding + '-invalid.json')
+                result = subprocess.run([str(console), 'audit', str(source), '--out', str(refused)], capture_output=True, env=env)
+                self.assertEqual((result.returncode, result.stdout), (2, b''))
+                self.assertTrue(result.stderr.isascii())
+                self.assertIn('A\U0001f642', json.loads(result.stderr)['error'])
+                self.assertFalse(refused.exists())
+                self.assertEqual(source.read_bytes(), original)
+
     def test_reject_ambiguous_json_policy_and_assignment(self):
         ambiguous = [
             '{"samples":[],"policy":{"subject":false,"subject":true}}',

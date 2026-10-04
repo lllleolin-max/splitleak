@@ -88,7 +88,9 @@ def main(argv=None):
             code = 0 if result["valid"] else 5
         else:
             result = apply(p, read(args.proposal))
-        payload = json.dumps(result, ensure_ascii=False, allow_nan=False, sort_keys=True, indent=2) + "\n"
+        # Keep saved UTF-8 report bytes compatible. ASCII escapes on console
+        # streams preserve arbitrary Unicode IDs under legacy stdout encodings.
+        payload = json.dumps(result, ensure_ascii=not bool(args.out), allow_nan=False, sort_keys=True, indent=2) + "\n"
         if args.out:
             with Path(args.out).open("x", encoding="utf-8", newline="\n") as stream:
                 stream.write(payload)
@@ -96,7 +98,7 @@ def main(argv=None):
             print(payload, end="")
         return code
     except (InputError, ValueError, OSError, TypeError) as error:
-        print(json.dumps({"error": str(error)}, ensure_ascii=False), file=sys.stderr)
+        print(json.dumps({"error": str(error)}, ensure_ascii=True), file=sys.stderr)
         return 2
 
 
